@@ -1,0 +1,31 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Backup and temporary files
+app_backup.py
+project_structure.txt
+structure.txt
+output/
+
+# Git database (never upload manually)
+.git/
+
+# Large raw TEC datasets
+data/processed/tec_2020.csv
+data/processed/tec_2021.csv
+data/processed/tec_2022.csv
+data/processed/tec_2023.csv
+data/processed/tec_2024.csv
+
+# Raw CDF data
+data/tec/
+*.cdf
+
+# Raw OMNI source files
+data/raw/
+data/omni/
+omni2_*.txt
+
+# SQLite temporary files
+*.db-journal

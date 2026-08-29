@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About | Ionosphere-AI</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:"Segoe UI",Arial,sans-serif;
+    color:white;
+
+    background:
+        radial-gradient(circle at 10% 15%,rgba(84,234,255,.13),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(157,102,255,.16),transparent 32%),
+        linear-gradient(135deg,#020511,#07102c 52%,#09041c);
+
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+
+    background-image:
+        radial-gradient(circle,white 1px,transparent 1px);
+
+    background-size:120px 120px;
+    opacity:.13;
+    z-index:-1;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    height:76px;
+    padding:0 6%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    background:rgba(2,5,17,.76);
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.logo{
+    color:white;
+    text-decoration:none;
+
+    font-size:23px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#54eaff;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+}
+
+.nav-links a{
+    color:#98a6c3;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:700;
+
+    transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#54eaff;
+
+    text-shadow:
+        0 0 18px rgba(84,234,255,.7);
+}
+
+
+/* ================= MAIN ================= */
+
+.container{
+    width:min(1150px,90%);
+    margin:auto;
+    padding:80px 0 100px;
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+    text-align:center;
+    padding:35px 0 70px;
+}
+
+.eyebrow{
+    color:#54eaff;
+
+    font-size:11px;
+    font-weight:900;
+
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+.hero h1{
+    margin-top:17px;
+
+    font-size:
+        clamp(45px,7vw,75px);
+
+    line-height:1;
+
+    letter-spacing:-3px;
+}
+
+.gradient{
+    background:
+        linear-gradient(
+            100deg,
+            #fff,
+            #54eaff,
+            #a87cff
+        );
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    max-width:760px;
+    margin:22px auto 0;
+
+    color:#8f9db9;
+
+    font-size:15px;
+    line-height:1.8;
+}
+
+
+/* ================= GLASS ================= */
+
+.glass{
+    background:
+        rgba(10,17,42,.70);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+    padding:32px;
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.28),
+
+        inset 0 1px 0
+        rgba(255,255,255,.04);
+}
+
+
+/* ================= MISSION ================= */
+
+.mission{
+    display:grid;
+
+    grid-template-columns:
+        1.1fr .9fr;
+
+    gap:20px;
+
+    align-items:stretch;
+}
+
+.mission h2{
+    font-size:29px;
+}
+
+.mission p{
+    margin-top:15px;
+
+    color:#8997b3;
+
+    font-size:13px;
+    line-height:1.8;
+}
+
+.highlight{
+    margin-top:22px;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    background:
+        rgba(84,234,255,.05);
+
+    border:
+        1px solid rgba(84,234,255,.12);
+}
+
+.highlight strong{
+    color:#54eaff;
+}
+
+.highlight p{
+    margin-top:5px;
+}
+
+
+/* ================= ORBIT ================= */
+
+.orbit-card{
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    min-height:300px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.orbit{
+    width:210px;
+    height:210px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(84,234,255,.30);
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 0 55px
+        rgba(84,234,255,.10);
+}
+
+.orbit::before,
+.orbit::after{
+    content:"";
+
+    position:absolute;
+
+    border:1px solid
+        rgba(145,120,255,.35);
+
+    border-radius:50%;
+
+    transform:rotate(60deg);
+}
+
+.orbit::before{
+    width:280px;
+    height:110px;
+}
+
+.orbit::after{
+    width:300px;
+    height:125px;
+
+    transform:rotate(-60deg);
+}
+
+.core{
+    width:105px;
+    height:105px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:39px;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #72f4ff,
+            #2456a1 50%,
+            #06091c
+        );
+
+    box-shadow:
+        0 0 40px
+        rgba(84,234,255,.4);
+}
+
+
+/* ================= TECHNOLOGY ================= */
+
+.section{
+    margin-top:25px;
+}
+
+.section-title{
+    font-size:30px;
+}
+
+.section-description{
+    margin-top:9px;
+
+    color:#8492ae;
+
+    font-size:13px;
+    line-height:1.7;
+}
+
+.tech-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+
+    margin-top:22px;
+}
+
+.tech{
+    padding:23px;
+
+    border-radius:19px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    transition:.3s;
+}
+
+.tech:hover{
+    transform:translateY(-7px);
+
+    border-color:
+        rgba(84,234,255,.25);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.25);
+}
+
+.tech-icon{
+    font-size:28px;
+}
+
+.tech h3{
+    margin-top:13px;
+    font-size:16px;
+}
+
+.tech p{
+    margin-top:7px;
+
+    color:#7f8da9;
+
+    font-size:11px;
+    line-height:1.6;
+}
+
+
+/* ================= PIPELINE ================= */
+
+.pipeline{
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:10px;
+
+    margin-top:25px;
+}
+
+.pipeline-item{
+    position:relative;
+
+    padding:22px 15px;
+
+    text-align:center;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+}
+
+.pipeline-item:not(:last-child)::after{
+    content:"→";
+
+    position:absolute;
+
+    right:-16px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#54eaff;
+
+    font-size:18px;
+
+    z-index:2;
+}
+
+.pipeline-number{
+    color:#54eaff;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.pipeline-item h3{
+    margin-top:9px;
+
+    font-size:14px;
+}
+
+.pipeline-item p{
+    margin-top:6px;
+
+    color:#7e8ba7;
+
+    font-size:10px;
+
+    line-height:1.5;
+}
+
+
+/* ================= OBJECTIVE ================= */
+
+.objective{
+    margin-top:20px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:15px;
+}
+
+.objective-card{
+    padding:24px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(84,234,255,.06),
+            rgba(142,112,255,.04)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+}
+
+.objective-card strong{
+    display:block;
+
+    color:#54eaff;
+
+    font-size:25px;
+}
+
+.objective-card h3{
+    margin-top:8px;
+
+    font-size:16px;
+}
+
+.objective-card p{
+    margin-top:7px;
+
+    color:#7f8ca7;
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+    margin-top:80px;
+
+    padding:32px 6%;
+
+    text-align:center;
+
+    color:#687792;
+
+    font-size:11px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .mission{
+        grid-template-columns:1fr;
+    }
+
+    .tech-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .pipeline{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .pipeline-item:not(:last-child)::after{
+        display:none;
+    }
+
+    .objective{
+        grid-template-columns:1fr;
+    }
+}
+
+
+@media(max-width:600px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .tech-grid{
+        grid-template-columns:1fr;
+    }
+
+    .pipeline{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <a
+        href="/home"
+        class="logo"
+    >
+        Ionosphere<span>-AI</span>
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">HOME</a>
+            HOME
+        </a>
+
+        <a href="/prediction">
+            PREDICTION
+        </a>
+
+        <a href="/dashboard">
+            DASHBOARD
+        </a>
+
+        <a
+            href="/about"
+            class="active"
+        >
+            ABOUT
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<main class="container">
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="eyebrow">
+        ABOUT THE PROJECT
+    </div>
+
+    <h1>
+
+        Intelligence for the
+        <span class="gradient">
+            Ionosphere.
+        </span>
+
+    </h1>
+
+    <p>
+
+        Ionosphere-AI is a machine-learning based
+        Total Electron Content prediction and
+        visualization system designed to transform
+        complex ionospheric observations into an
+        understandable scientific experience.
+
+    </p>
+
+</section>
+
+
+
+<!-- ================= MISSION ================= -->
+
+<section class="mission">
+
+
+    <div class="glass">
+
+        <h2>
+            🌌 Our Mission
+        </h2>
+
+        <p>
+
+            The ionosphere constantly changes with
+            geographic location and time. Understanding
+            these changes is important for technologies
+            that depend on signals travelling through
+            the Earth's upper atmosphere.
+
+        </p>
+
+        <p>
+
+            This project uses historical TEC observations
+            and machine learning to estimate TEC values
+            for a selected location and time.
+
+        </p>
+
+
+        <div class="highlight">
+
+            <strong>
+                PROJECT GOAL
+            </strong>
+
+            <p>
+
+                Convert complex scientific data into
+                an intuitive prediction and visualization
+                platform.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="glass orbit-card">
+
+        <div class="orbit">
+
+            <div class="core">
+                🌍
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= TECHNOLOGY ================= -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        TECHNOLOGY
+    </div>
+
+    <h2 class="section-title">
+
+        Built with
+        <span class="gradient">
+            intelligent technology.
+        </span>
+
+    </h2>
+
+    <p class="section-description">
+
+        The system combines data processing,
+        machine learning and an interactive
+        web interface.
+
+    </p>
+
+
+    <div class="tech-grid">
+
+
+        <div class="tech">
+
+            <div class="tech-icon">
+                🐍
+            </div>
+
+            <h3>
+                Python
+            </h3>
+
+            <p>
+                Core programming language for
+                data processing and machine
+                learning.
+            </p>
+
+        </div>
+
+
+        <div class="tech">
+
+            <div class="tech-icon">
+                🧠
+            </div>
+
+            <h3>
+                Machine Learning
+            </h3>
+
+            <p>
+                Trained predictive models estimate
+                TEC from geographic and temporal
+                features.
+            </p>
+
+        </div>
+
+
+        <div class="tech">
+
+            <div class="tech-icon">
+                🌐
+            </div>
+
+            <h3>
+                Flask
+            </h3>
+
+            <p>
+                Connects the prediction engine
+                with the interactive web interface.
+            </p>
+
+        </div>
+
+
+        <div class="tech">
+
+            <div class="tech-icon">
+                📊
+            </div>
+
+            <h3>
+                Visualization
+            </h3>
+
+            <p>
+                Charts and visual indicators make
+                model outputs easier to understand.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= PIPELINE ================= -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        SYSTEM PIPELINE
+    </div>
+
+    <h2 class="section-title">
+
+        From data to
+        <span class="gradient">
+            insight.
+        </span>
+
+    </h2>
+
+
+    <div class="pipeline">
+
+
+        <div class="pipeline-item">
+
+            <div class="pipeline-number">
+                01
+            </div>
+
+            <h3>
+                Data
+            </h3>
+
+            <p>
+                Historical TEC observations
+                provide the foundation.
+            </p>
+
+        </div>
+
+
+        <div class="pipeline-item">
+
+            <div class="pipeline-number">
+                02
+            </div>
+
+            <h3>
+                Processing
+            </h3>
+
+            <p>
+                Geographic and temporal
+                features are prepared.
+            </p>
+
+        </div>
+
+
+        <div class="pipeline-item">
+
+            <div class="pipeline-number">
+                03
+            </div>
+
+            <h3>
+                AI Model
+            </h3>
+
+            <p>
+                The trained model generates
+                a TEC prediction.
+            </p>
+
+        </div>
+
+
+        <div class="pipeline-item">
+
+            <div class="pipeline-number">
+                04
+            </div>
+
+            <h3>
+                Analysis
+            </h3>
+
+            <p>
+                Results are converted into
+                meaningful indicators.
+            </p>
+
+        </div>
+
+
+        <div class="pipeline-item">
+
+            <div class="pipeline-number">
+                05
+            </div>
+
+            <h3>
+                Dashboard
+            </h3>
+
+            <p>
+                Users explore the final
+                prediction visually.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= OBJECTIVES ================= -->
+
+<section class="section">
+
+    <div class="eyebrow">
+        PROJECT OBJECTIVES
+    </div>
+
+    <h2 class="section-title">
+        What this system delivers.
+    </h2>
+
+
+    <div class="objective">
+
+
+        <div class="objective-card">
+
+            <strong>
+                01
+            </strong>
+
+            <h3>
+                Predict
+            </h3>
+
+            <p>
+                Estimate Total Electron Content
+                for a selected location and time.
+            </p>
+
+        </div>
+
+
+        <div class="objective-card">
+
+            <strong>
+                02
+            </strong>
+
+            <h3>
+                Understand
+            </h3>
+
+            <p>
+                Present scientific information
+                in a simple visual format.
+            </p>
+
+        </div>
+
+
+        <div class="objective-card">
+
+            <strong>
+                03
+            </strong>
+
+            <h3>
+                Visualize
+            </h3>
+
+            <p>
+                Transform prediction results into
+                charts and interactive analytics.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<footer>
+
+    IONOSPHERE-AI
+    •
+    TOTAL ELECTRON CONTENT
+    •
+    MACHINE LEARNING
+    •
+    SCIENTIFIC VISUALIZATION
+
+</footer>
+
+
+</body>
+</html>

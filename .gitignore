@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Database
+prediction_history.db
+
+# Backup files
+app_backup.py
+
+# ZIP files
+*.zip
+
+# Raw TEC and OMNI datasets
+data/tec/
+data/omni/
+
+# Large processed yearly datasets
+data/processed/tec_2020.csv
+data/processed/tec_2021.csv
+data/processed/tec_2022.csv
+data/processed/tec_2023.csv
+data/processed/tec_2024.csv
+
+# System files
+.DS_Store
+Thumbs.db

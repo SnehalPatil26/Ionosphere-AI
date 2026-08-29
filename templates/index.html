@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ionosphere-AI | Home</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(0,225,255,.15),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 25%,
+                    rgba(143,92,255,.17),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(255,90,200,.08),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #020511,
+                    #07102c 50%,
+                    #08041b
+                );
+
+            overflow-x: hidden;
+        }
+
+
+        /* ================= STARS ================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background-image:
+                radial-gradient(
+                    circle,
+                    white 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                115px 115px;
+
+            opacity: .16;
+
+            z-index: -2;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            height: 76px;
+
+            padding: 0 6%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            background:
+                rgba(2,5,17,.72);
+
+            backdrop-filter:
+                blur(20px);
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+
+        .logo {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 23px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+
+        .logo span {
+
+            color: #54eaff;
+
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 28px;
+
+        }
+
+
+        .nav-links a {
+
+            color: #9daac7;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            transition: .3s;
+        }
+
+
+        .nav-links a:hover {
+
+            color: #54eaff;
+
+            text-shadow:
+                0 0 18px
+                rgba(84,234,255,.7);
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+
+            width:
+                min(1200px,90%);
+
+            min-height:
+                calc(100vh - 76px);
+
+            margin:
+                auto;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1.05fr .95fr;
+
+            align-items:
+                center;
+
+            gap: 40px;
+
+            padding:
+                60px 0;
+        }
+
+
+        .eyebrow {
+
+            color:
+                #54eaff;
+
+            font-size:
+                11px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                4px;
+
+            text-transform:
+                uppercase;
+        }
+
+
+        .hero h1 {
+
+            margin-top:
+                18px;
+
+            font-size:
+                clamp(
+                    50px,
+                    7vw,
+                    90px
+                );
+
+            line-height:
+                .94;
+
+            letter-spacing:
+                -4px;
+        }
+
+
+        .gradient {
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #ffffff 10%,
+                    #54eaff 48%,
+                    #a97dff 90%
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+        }
+
+
+        .hero p {
+
+            max-width:
+                650px;
+
+            margin-top:
+                25px;
+
+            color:
+                #92a0bd;
+
+            font-size:
+                16px;
+
+            line-height:
+                1.8;
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+
+            display:
+                flex;
+
+            gap:
+                14px;
+
+            flex-wrap:
+                wrap;
+
+            margin-top:
+                32px;
+        }
+
+
+        .btn {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                15px 23px;
+
+            border-radius:
+                14px;
+
+            text-decoration:
+                none;
+
+            font-size:
+                13px;
+
+            font-weight:
+                900;
+
+            transition:
+                .3s;
+        }
+
+
+        .btn-primary {
+
+            color:
+                #03101a;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #54eaff,
+                    #8c7cff
+                );
+
+            box-shadow:
+                0 0 35px
+                rgba(84,234,255,.18);
+        }
+
+
+        .btn-secondary {
+
+            color:
+                white;
+
+            background:
+                rgba(255,255,255,.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+        }
+
+
+        .btn:hover {
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,0,0,.35);
+        }
+
+
+        /* ================= EARTH ================= */
+
+        .visual {
+
+            position:
+                relative;
+
+            min-height:
+                530px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+        }
+
+
+        .earth {
+
+            width:
+                min(
+                    390px,
+                    70vw
+                );
+
+            aspect-ratio:
+                1;
+
+            border-radius:
+                50%;
+
+            position:
+                relative;
+
+            background:
+                radial-gradient(
+                    circle at 34% 28%,
+                    #91f2ff 0 2%,
+                    #2869ad 18%,
+                    #10275f 48%,
+                    #030616 74%
+                );
+
+            box-shadow:
+
+                0 0 45px
+                rgba(84,234,255,.32),
+
+                inset -40px -25px 70px
+                rgba(0,0,0,.75),
+
+                0 0 130px
+                rgba(139,99,255,.20);
+
+            animation:
+                earthFloat
+                6s ease-in-out
+                infinite;
+        }
+
+
+        .earth::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 7%;
+
+            border-radius:
+                50%;
+
+            background:
+
+                radial-gradient(
+                    ellipse at 28% 45%,
+                    rgba(100,255,180,.75)
+                    0 7%,
+                    transparent 8%
+                ),
+
+                radial-gradient(
+                    ellipse at 57% 35%,
+                    rgba(255,220,110,.6)
+                    0 6%,
+                    transparent 7%
+                ),
+
+                radial-gradient(
+                    ellipse at 63% 63%,
+                    rgba(100,255,180,.55)
+                    0 9%,
+                    transparent 10%
+                );
+
+            filter:
+                blur(3px);
+
+            opacity:
+                .8;
+        }
+
+
+        .atmosphere {
+
+            position:
+                absolute;
+
+            width:
+                125%;
+
+            height:
+                35%;
+
+            border:
+                1px solid
+                rgba(84,234,255,.55);
+
+            border-radius:
+                50%;
+
+            transform:
+                rotate(-18deg);
+
+            box-shadow:
+                0 0 25px
+                rgba(84,234,255,.16);
+        }
+
+
+        .atmosphere.two {
+
+            width:
+                145%;
+
+            height:
+                44%;
+
+            border-color:
+                rgba(164,124,255,.38);
+
+            transform:
+                rotate(18deg);
+        }
+
+
+        @keyframes earthFloat {
+
+            0%,100% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-12px)
+                    rotate(1deg);
+
+            }
+
+        }
+
+
+        /* ================= FLOAT CARDS ================= */
+
+        .float-card {
+
+            position:
+                absolute;
+
+            padding:
+                14px 17px;
+
+            border-radius:
+                15px;
+
+            background:
+                rgba(8,14,35,.78);
+
+            border:
+                1px solid
+                rgba(84,234,255,.20);
+
+            backdrop-filter:
+                blur(15px);
+
+            box-shadow:
+                0 18px 50px
+                rgba(0,0,0,.35);
+
+            animation:
+                float
+                4s ease-in-out
+                infinite;
+        }
+
+
+        .float-card small {
+
+            display:
+                block;
+
+            color:
+                #7585a4;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                1.5px;
+        }
+
+
+        .float-card strong {
+
+            display:
+                block;
+
+            margin-top:
+                5px;
+
+            color:
+                #54eaff;
+
+            font-size:
+                18px;
+        }
+
+
+        .card-one {
+
+            top:
+                8%;
+
+            right:
+                0;
+        }
+
+
+        .card-two {
+
+            bottom:
+                16%;
+
+            left:
+                0;
+
+            animation-delay:
+                1s;
+        }
+
+
+        .card-three {
+
+            bottom:
+                3%;
+
+            right:
+                10%;
+
+            animation-delay:
+                2s;
+        }
+
+
+        @keyframes float {
+
+            50% {
+
+                transform:
+                    translateY(-10px);
+
+            }
+
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .section {
+
+            width:
+                min(
+                    1200px,
+                    90%
+                );
+
+            margin:
+                auto;
+
+            padding:
+                80px 0;
+        }
+
+
+        .section-title {
+
+            font-size:
+                38px;
+
+            letter-spacing:
+                -1px;
+        }
+
+
+        .section-description {
+
+            margin-top:
+                10px;
+
+            color:
+                #8997b4;
+
+            max-width:
+                650px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .features {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:
+                18px;
+
+            margin-top:
+                30px;
+        }
+
+
+        .feature {
+
+            padding:
+                27px;
+
+            border-radius:
+                22px;
+
+            background:
+                rgba(12,19,46,.68);
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            backdrop-filter:
+                blur(18px);
+
+            transition:
+                .35s;
+        }
+
+
+        .feature:hover {
+
+            transform:
+                translateY(-8px);
+
+            border-color:
+                rgba(84,234,255,.25);
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,.30);
+        }
+
+
+        .feature-icon {
+
+            font-size:
+                30px;
+        }
+
+
+        .feature h3 {
+
+            margin-top:
+                14px;
+
+            font-size:
+                19px;
+        }
+
+
+        .feature p {
+
+            margin-top:
+                9px;
+
+            color:
+                #8492af;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.7;
+        }
+
+
+        /* ================= HOW IT WORKS ================= */
+
+        .steps {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap:
+                15px;
+
+            margin-top:
+                30px;
+        }
+
+
+        .step {
+
+            padding:
+                23px;
+
+            border-radius:
+                18px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+        }
+
+
+        .step-number {
+
+            color:
+                #54eaff;
+
+            font-size:
+                12px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                2px;
+        }
+
+
+        .step h3 {
+
+            margin-top:
+                10px;
+
+            font-size:
+                16px;
+        }
+
+
+        .step p {
+
+            margin-top:
+                7px;
+
+            color:
+                #8190ad;
+
+            font-size:
+                12px;
+
+            line-height:
+                1.6;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+
+            padding:
+                35px 6%;
+
+            text-align:
+                center;
+
+            color:
+                #687792;
+
+            font-size:
+                11px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.06);
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:900px) {
+
+            .hero {
+
+                grid-template-columns:
+                    1fr;
+
+                text-align:
+                    center;
+            }
+
+
+            .hero p {
+
+                margin-left:
+                    auto;
+
+                margin-right:
+                    auto;
+            }
+
+
+            .buttons {
+
+                justify-content:
+                    center;
+            }
+
+
+            .visual {
+
+                min-height:
+                    430px;
+            }
+
+
+            .features {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .steps {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+        }
+
+
+        @media(max-width:600px) {
+
+            .nav-links {
+
+                display:
+                    none;
+            }
+
+
+            .hero,
+            .section {
+
+                width:
+                    92%;
+            }
+
+
+            .hero h1 {
+
+                letter-spacing:
+                    -2px;
+            }
+
+
+            .visual {
+
+                min-height:
+                    350px;
+            }
+
+
+            .features,
+            .steps {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .earth {
+
+                width:
+                    280px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <a
+        href="/home"
+        class="logo"
+    >
+        Ionosphere<span>-AI</span>
+    </a>
+
+
+    <div class="nav-links">
+
+        <a
+            href="/home"
+        >
+            HOME
+        </a>
+
+        <a
+            href="/prediction"
+        >
+            PREDICTION
+        </a>
+
+        <a
+            href="/dashboard"
+        >
+            DASHBOARD
+        </a>
+
+        <a
+            href="/about"
+        >
+            ABOUT
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+
+    <!-- LEFT -->
+
+    <div>
+
+        <div class="eyebrow">
+            AI • SPACE • IONOSPHERE • TEC
+        </div>
+
+
+        <h1>
+
+            See the
+            <span class="gradient">
+                Invisible.
+            </span>
+
+            <br>
+
+            Predict the
+            <span class="gradient">
+                Ionosphere.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Ionosphere-AI transforms geospatial and
+            temporal observations into intelligent
+            Total Electron Content predictions —
+            presented through a futuristic,
+            interactive scientific interface.
+
+        </p>
+
+
+        <div class="buttons">
+
+            <a
+                href="/prediction"
+                class="btn btn-primary"
+            >
+                ⚡ START PREDICTION
+            </a>
+
+
+            <a
+                href="/dashboard"
+                class="btn btn-secondary"
+            >
+                📊 EXPLORE DASHBOARD
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT -->
+
+    <div class="visual">
+
+
+        <div class="earth">
+
+            <div
+                class="atmosphere"
+            ></div>
+
+            <div
+                class="atmosphere two"
+            ></div>
+
+        </div>
+
+
+        <!-- FLOAT CARD -->
+
+        <div
+            class="float-card card-one"
+        >
+
+            <small>
+                IONOSPHERE
+            </small>
+
+            <strong>
+                ACTIVE
+            </strong>
+
+        </div>
+
+
+        <div
+            class="float-card card-two"
+        >
+
+            <small>
+                AI ENGINE
+            </small>
+
+            <strong>
+                HYBRID
+            </strong>
+
+        </div>
+
+
+        <div
+            class="float-card card-three"
+        >
+
+            <small>
+                OUTPUT
+            </small>
+
+            <strong>
+                TECU
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FEATURES
+===================================================== -->
+
+<section class="section">
+
+
+    <div class="eyebrow">
+        SYSTEM EXPERIENCE
+    </div>
+
+
+    <h2 class="section-title">
+
+        One system.
+        <span class="gradient">
+            One futuristic universe.
+        </span>
+
+    </h2>
+
+
+    <p class="section-description">
+
+        Prediction, analytics and scientific
+        visualization are connected into one
+        consistent experience.
+
+    </p>
+
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🔮
+            </div>
+
+            <h3>
+                AI Prediction
+            </h3>
+
+            <p>
+                Enter latitude, longitude,
+                date and time to generate
+                a TEC prediction from the
+                trained machine learning model.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🌍
+            </div>
+
+            <h3>
+                Ionosphere Intelligence
+            </h3>
+
+            <p>
+                Explore the relationship between
+                location, time and ionospheric
+                electron content.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Visual Analytics
+            </h3>
+
+            <p>
+                Turn the prediction into charts,
+                model comparisons and an
+                interactive dashboard.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section class="section">
+
+
+    <div class="eyebrow">
+        HOW IT WORKS
+    </div>
+
+
+    <h2 class="section-title">
+
+        From
+        <span class="gradient">
+            observation
+        </span>
+        to prediction.
+
+    </h2>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                01
+            </div>
+
+            <h3>
+                Location
+            </h3>
+
+            <p>
+                Latitude and longitude
+                identify the observation
+                point.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <h3>
+                Time
+            </h3>
+
+            <p>
+                Date and time provide
+                the temporal context
+                for prediction.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <h3>
+                Hybrid AI
+            </h3>
+
+            <p>
+                Machine learning models
+                estimate the expected
+                TEC value.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <h3>
+                Visualization
+            </h3>
+
+            <p>
+                The result becomes
+                an interactive dashboard
+                for analysis.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    IONOSPHERE-AI
+    •
+    TEC PREDICTION
+    •
+    AI VISUALIZATION
+
+</footer>
+
+
+</body>
+</html>

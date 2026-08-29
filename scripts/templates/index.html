@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block title %}
+IONOSPHERE-AI | Mission Control
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="container">
+
+        <!-- SYSTEM BADGE -->
+
+        <div class="badge">
+            <span class="status-dot"></span>
+            IONOSPHERE INTELLIGENCE SYSTEM
+        </div>
+
+
+        <!-- MAIN HEADING -->
+
+        <h1>
+            Understand the
+            <span>Invisible Sky.</span>
+        </h1>
+
+
+        <!-- DESCRIPTION -->
+
+        <p>
+            IONOSPHERE-AI analyzes Total Electron Content (TEC),
+            space-weather conditions and historical ionospheric data
+            to help predict GPS and communication degradation risks.
+        </p>
+
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="hero-buttons">
+
+            <a href="/observatory" class="btn btn-primary">
+                🚀 Launch Observatory
+            </a>
+
+            <a href="/prediction" class="btn btn-secondary">
+                ⚡ Run Prediction
+            </a>
+
+        </div>
+
+
+        <!-- QUICK SYSTEM INFORMATION -->
+
+        <div class="kpi-grid" style="margin-top: 55px;">
+
+            <div class="card kpi-card">
+
+                <div class="kpi-label">
+                    DATA DOMAIN
+                </div>
+
+                <div class="kpi-value">
+                    TEC
+                </div>
+
+                <div class="kpi-change">
+                    Ionospheric Signal
+                </div>
+
+            </div>
+
+
+            <div class="card kpi-card">
+
+                <div class="kpi-label">
+                    ANALYSIS
+                </div>
+
+                <div class="kpi-value">
+                    AI
+                </div>
+
+                <div class="kpi-change">
+                    Prediction Engine
+                </div>
+
+            </div>
+
+
+            <div class="card kpi-card">
+
+                <div class="kpi-label">
+                    MONITORING
+                </div>
+
+                <div class="kpi-value">
+                    GPS
+                </div>
+
+                <div class="kpi-change">
+                    Signal Environment
+                </div>
+
+            </div>
+
+
+            <div class="card kpi-card">
+
+                <div class="kpi-label">
+                    MODE
+                </div>
+
+                <div class="kpi-value">
+                    LIVE
+                </div>
+
+                <div class="kpi-change">
+                    Observatory Ready
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MISSION OVERVIEW
+     ===================================================== -->
+
+<section class="container" style="padding-bottom: 70px;">
+
+    <div class="page-header">
+
+        <h1>
+            Mission Overview
+        </h1>
+
+        <p>
+            A compact view of what IONOSPHERE-AI is designed to monitor.
+        </p>
+
+    </div>
+
+
+    <div class="chart-grid" style="margin-top: 25px;">
+
+        <!-- CARD 1 -->
+
+        <div class="card chart-card">
+
+            <h2>
+                🌍 Ionospheric Intelligence
+            </h2>
+
+            <p style="color: var(--muted); line-height: 1.8;">
+                Study variations in Total Electron Content across
+                geographic locations and time periods.
+            </p>
+
+        </div>
+
+
+        <!-- CARD 2 -->
+
+        <div class="card chart-card">
+
+            <h2>
+                🛰️ GPS Risk Analysis
+            </h2>
+
+            <p style="color: var(--muted); line-height: 1.8;">
+                Transform ionospheric observations into an
+                understandable communication and navigation risk signal.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- SECOND ROW -->
+
+    <div class="chart-grid" style="margin-top: 20px;">
+
+        <div class="card chart-card">
+
+            <h2>
+                🧠 Machine Learning
+            </h2>
+
+            <p style="color: var(--muted); line-height: 1.8;">
+                Use historical TEC and space-weather information
+                to support predictive analysis.
+            </p>
+
+        </div>
+
+
+        <div class="card chart-card">
+
+            <h2>
+                📡 Data Telescope
+            </h2>
+
+            <p style="color: var(--muted); line-height: 1.8;">
+                Explore the processed dataset through interactive
+                analytics and visual intelligence.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MISSION STATUS
+     ===================================================== -->
+
+<section class="container" style="padding-bottom: 80px;">
+
+    <div class="card prediction-panel">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:20px;
+            flex-wrap:wrap;
+        ">
+
+            <div>
+
+                <div class="badge">
+                    <span class="status-dot"></span>
+                    SYSTEM STATUS
+                </div>
+
+                <h2 style="margin-top:18px;">
+                    Observatory systems ready.
+                </h2>
+
+                <p style="
+                    color:var(--muted);
+                    margin-top:10px;
+                    line-height:1.7;
+                ">
+                    Navigate to the Observatory to inspect your
+                    processed TEC dataset and prediction environment.
+                </p>
+
+            </div>
+
+
+            <a href="/observatory" class="btn btn-primary">
+                Enter Mission Control →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

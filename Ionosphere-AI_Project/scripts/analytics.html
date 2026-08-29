@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Telescope | Ionosphere AI</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+    radial-gradient(circle at 15% 20%,rgba(0,217,255,.10),transparent 30%),
+    radial-gradient(circle at 85% 75%,rgba(109,92,255,.12),transparent 30%),
+    #050816;
+    color:#fff;
+    min-height:100vh;
+}
+
+.navbar{
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(5,8,22,.94);
+    border-bottom:1px solid rgba(0,217,255,.18);
+    position:sticky;
+    top:0;
+    z-index:10;
+    backdrop-filter:blur(15px);
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo span{color:#00d9ff}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+}
+
+.nav-links a{
+    color:#aab5d6;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.8px;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#00d9ff;
+}
+
+.container{
+    width:88%;
+    max-width:1400px;
+    margin:auto;
+    padding:45px 0 60px;
+}
+
+.kicker{
+    color:#00d9ff;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:3px;
+    margin-bottom:10px;
+}
+
+h1{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#8995b7;
+    font-size:15px;
+    margin-bottom:28px;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    border-radius:20px;
+    color:#4fffc0;
+    background:rgba(0,220,150,.07);
+    border:1px solid rgba(0,220,150,.25);
+    font-size:11px;
+    margin-bottom:28px;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#35f7ae;
+    box-shadow:0 0 12px #35f7ae;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:22px;
+    margin-bottom:22px;
+}
+
+.panel{
+    background:rgba(10,16,36,.84);
+    border:1px solid rgba(100,130,200,.17);
+    border-radius:20px;
+    padding:25px;
+}
+
+.panel-title{
+    font-size:17px;
+    font-weight:700;
+}
+
+.panel-subtitle{
+    color:#7682a5;
+    font-size:11px;
+    margin-top:5px;
+    margin-bottom:20px;
+}
+
+.chart-box{
+    height:330px;
+    position:relative;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-bottom:22px;
+}
+
+.stat{
+    padding:22px;
+    border-radius:18px;
+    background:rgba(13,20,43,.78);
+    border:1px solid rgba(100,130,200,.18);
+}
+
+.stat-label{
+    color:#8792b1;
+    font-size:11px;
+    letter-spacing:1px;
+    margin-bottom:10px;
+}
+
+.stat-value{
+    font-size:27px;
+    font-weight:800;
+    color:#00d9ff;
+}
+
+.info{
+    color:#8995b7;
+    line-height:1.7;
+    font-size:13px;
+}
+
+footer{
+    text-align:center;
+    color:#56617f;
+    font-size:11px;
+    padding:20px;
+    border-top:1px solid rgba(100,130,200,.1);
+}
+
+@media(max-width:900px){
+    .grid{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr}
+    .nav-links{gap:12px}
+    .nav-links a{font-size:10px}
+}
+
+@media(max-width:600px){
+    .navbar{padding:0 20px}
+    .logo{font-size:16px}
+    .nav-links{display:none}
+    .container{width:92%}
+    h1{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        🛰️ IONOSPHERE <span>AI</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">HOME</a>
+        <a href="{{ url_for('prediction') }}">PREDICTION</a>
+        <a href="{{ url_for('dashboard') }}">DASHBOARD</a>
+        <a href="{{ url_for('observatory') }}">OBSERVATORY</a>
+        <a href="{{ url_for('analytics') }}" class="active">ANALYTICS</a>
+        <a href="{{ url_for('model') }}">MODEL</a>
+        <a href="{{ url_for('data') }}">DATA</a>
+        <a href="{{ url_for('history') }}">HISTORY</a>
+    </div>
+
+</nav>
+
+<main class="container">
+
+    <div class="kicker">DATA TELESCОPE / ANALYTICS ENGINE</div>
+
+    <h1>TEC Analytics</h1>
+
+    <p class="subtitle">
+        Historical Total Electron Content analysis and model prediction comparison.
+    </p>
+
+    <div class="status">
+        <span class="dot"></span>
+        REAL HISTORICAL DATA CONNECTED
+    </div>
+
+    <section class="stats">
+
+        <div class="stat">
+            <div class="stat-label">DATA POINTS</div>
+            <div class="stat-value" id="records">—</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">AVERAGE TEC</div>
+            <div class="stat-value" id="avgTec">—</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">MAE</div>
+            <div class="stat-value" id="mae">—</div>
+        </div>
+
+    </section>
+
+    <section class="grid">
+
+        <div class="panel">
+
+            <div class="panel-title">
+                Actual vs Predicted TEC
+            </div>
+
+            <div class="panel-subtitle">
+                Time-series comparison from the TEC-OMNI dataset
+            </div>
+
+            <div class="chart-box">
+                <canvas id="tecChart"></canvas>
+            </div>
+
+        </div>
+
+        <div class="panel">
+
+            <div class="panel-title">
+                Analytics Overview
+            </div>
+
+            <div class="panel-subtitle">
+                Dataset interpretation
+            </div>
+
+            <p class="info">
+                This module visualizes historical Total Electron Content
+                values against model predictions. The chart helps identify
+                temporal variations and prediction behaviour across the
+                available dataset.
+                <br><br>
+                TEC is an important ionospheric parameter because variations
+                in electron content can influence GPS positioning and
+                radio communication reliability.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    IONOSPHERE AI • TEC • OMNI • SPACE WEATHER ANALYTICS
+</footer>
+
+<script>
+
+let chart;
+
+async function loadAnalytics(){
+
+    try{
+
+        const response = await fetch("/api/analytics");
+        const data = await response.json();
+
+        if(data.status !== "success"){
+            console.error(data.message);
+            return;
+        }
+
+        const summaryResponse = await fetch("/api/summary");
+        const summary = await summaryResponse.json();
+
+        document.getElementById("records").textContent =
+            summary.total_records ?? "—";
+
+        document.getElementById("avgTec").textContent =
+            summary.average_tec ?? "—";
+
+        document.getElementById("mae").textContent =
+            summary.mean_absolute_error ?? "—";
+
+        const ctx =
+            document.getElementById("tecChart").getContext("2d");
+
+        if(chart){
+            chart.destroy();
+        }
+
+        chart = new Chart(ctx,{
+
+            type:"line",
+
+            data:{
+                labels:data.dates,
+
+                datasets:[
+
+                    {
+                        label:"Actual TEC",
+                        data:data.actual_tec,
+                        borderWidth:2,
+                        tension:.35,
+                        pointRadius:0
+                    },
+
+                    {
+                        label:"Predicted TEC",
+                        data:data.predicted_tec,
+                        borderWidth:2,
+                        tension:.35,
+                        pointRadius:0
+                    }
+
+                ]
+            },
+
+            options:{
+                responsive:true,
+                maintainAspectRatio:false,
+
+                interaction:{
+                    mode:"index",
+                    intersect:false
+                },
+
+                plugins:{
+                    legend:{
+                        labels:{
+                            color:"#aab5d6"
+                        }
+                    }
+                },
+
+                scales:{
+                    x:{
+                        ticks:{
+                            color:"#687494",
+                            maxTicksLimit:10
+                        },
+                        grid:{
+                            display:false
+                        }
+                    },
+
+                    y:{
+                        ticks:{
+                            color:"#687494"
+                        },
+                        grid:{
+                            color:"rgba(120,140,190,.08)"
+                        },
+                        title:{
+                            display:true,
+                            text:"TEC / TECU",
+                            color:"#8995b7"
+                        }
+                    }
+                }
+            }
+
+        });
+
+    }catch(error){
+
+        console.error("Analytics error:",error);
+
+    }
+
+}
+
+loadAnalytics();
+
+</script>
+
+</body>
+</html>

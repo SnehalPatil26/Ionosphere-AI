@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prediction | Ionosphere-AI</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:"Segoe UI",Arial,sans-serif;
+    color:white;
+
+    background:
+        radial-gradient(circle at 15% 15%,rgba(84,234,255,.14),transparent 28%),
+        radial-gradient(circle at 85% 20%,rgba(153,92,255,.18),transparent 30%),
+        linear-gradient(135deg,#020511,#07102d 55%,#09041d);
+
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1px);
+
+    background-size:120px 120px;
+    opacity:.12;
+    pointer-events:none;
+    z-index:-1;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    height:76px;
+    padding:0 6%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    background:rgba(2,5,17,.78);
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.logo{
+    text-decoration:none;
+    color:white;
+    font-size:23px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#54eaff;
+    text-shadow:0 0 20px rgba(84,234,255,.6);
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#8997b2;
+    font-size:13px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#54eaff;
+    text-shadow:0 0 18px rgba(84,234,255,.7);
+}
+
+
+/* ================= MAIN ================= */
+
+.container{
+    width:min(1100px,92%);
+    margin:auto;
+    padding:70px 0 100px;
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+    text-align:center;
+    margin-bottom:42px;
+}
+
+.eyebrow{
+    color:#54eaff;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:4px;
+}
+
+.hero h1{
+    margin-top:12px;
+    font-size:clamp(38px,6vw,65px);
+    letter-spacing:-3px;
+}
+
+.gradient{
+    background:linear-gradient(100deg,#ffffff,#54eaff,#a97cff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    max-width:650px;
+    margin:15px auto 0;
+    color:#8492ad;
+    font-size:13px;
+    line-height:1.7;
+}
+
+
+/* ================= CARD ================= */
+
+.prediction-card{
+    position:relative;
+    overflow:hidden;
+
+    padding:35px;
+    border-radius:28px;
+
+    background:rgba(10,17,42,.76);
+
+    border:1px solid rgba(255,255,255,.09);
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:0 30px 100px rgba(0,0,0,.35);
+}
+
+.prediction-card::before{
+    content:"";
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    top:-180px;
+    right:-130px;
+
+    border-radius:50%;
+
+    background:rgba(84,234,255,.07);
+}
+
+.card-title{
+    font-size:20px;
+    font-weight:900;
+}
+
+.card-subtitle{
+    margin-top:6px;
+    color:#71809c;
+    font-size:11px;
+}
+
+
+/* ================= DATA RANGE ================= */
+
+.data-range{
+    margin-top:18px;
+    padding:11px 14px;
+
+    border-radius:12px;
+
+    color:#54eaff;
+
+    background:rgba(84,234,255,.045);
+
+    border:1px solid rgba(84,234,255,.10);
+
+    font-size:10px;
+    font-weight:800;
+
+    text-align:center;
+}
+
+
+/* ================= FORM ================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+    margin-top:25px;
+}
+
+.field.full-width{
+    grid-column:1 / -1;
+}
+
+.field label{
+    display:block;
+    margin-bottom:8px;
+
+    color:#8090ad;
+
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1.5px;
+}
+
+.field input{
+    width:100%;
+    padding:15px 16px;
+
+    color:white;
+
+    outline:none;
+
+    border-radius:13px;
+
+    background:rgba(255,255,255,.035);
+
+    border:1px solid rgba(255,255,255,.09);
+
+    font-size:13px;
+
+    transition:.3s;
+}
+
+.field input:focus{
+    border-color:#54eaff;
+
+    box-shadow:
+        0 0 0 3px rgba(84,234,255,.08),
+        0 0 25px rgba(84,234,255,.08);
+}
+
+
+/* ================= LOCATION ================= */
+
+.location-wrapper{
+    display:flex;
+    gap:10px;
+}
+
+.location-wrapper input{
+    flex:1;
+}
+
+.location-btn{
+    padding:0 18px;
+
+    border:none;
+    border-radius:13px;
+
+    cursor:pointer;
+
+    color:#54eaff;
+
+    background:rgba(84,234,255,.08);
+
+    border:1px solid rgba(84,234,255,.20);
+
+    font-size:10px;
+    font-weight:900;
+
+    white-space:nowrap;
+}
+
+.location-status{
+    margin-top:8px;
+    color:#6f7d98;
+    font-size:9px;
+}
+
+.location-status.success{
+    color:#54eaff;
+}
+
+.location-status.error{
+    color:#ff9ca8;
+}
+
+
+/* ================= BUTTON ================= */
+
+.predict-btn{
+    width:100%;
+    margin-top:25px;
+    padding:17px;
+
+    border:none;
+    border-radius:14px;
+
+    cursor:pointer;
+
+    color:#020511;
+
+    font-size:12px;
+    font-weight:950;
+    letter-spacing:1.5px;
+
+    background:linear-gradient(100deg,#54eaff,#9b82ff);
+
+    box-shadow:0 10px 35px rgba(84,234,255,.16);
+}
+
+.predict-btn:hover{
+    transform:translateY(-2px);
+}
+
+.predict-btn:disabled{
+    cursor:not-allowed;
+    opacity:.55;
+}
+
+
+/* ================= LOADER ================= */
+
+.loader{
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:10px;
+    margin-top:20px;
+
+    color:#54eaff;
+
+    font-size:10px;
+    font-weight:800;
+}
+
+.spinner{
+    width:18px;
+    height:18px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(255,255,255,.1);
+    border-top-color:#54eaff;
+
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* ================= ERROR ================= */
+
+.error{
+    display:none;
+
+    margin-top:18px;
+    padding:14px;
+
+    border-radius:12px;
+
+    color:#ff9ca8;
+
+    background:rgba(255,70,100,.07);
+
+    border:1px solid rgba(255,70,100,.15);
+
+    font-size:11px;
+}
+
+
+/* ================= RESULT ================= */
+
+.result{
+    display:none;
+
+    margin-top:25px;
+    padding:25px;
+
+    border-radius:20px;
+
+    background:rgba(84,234,255,.035);
+
+    border:1px solid rgba(84,234,255,.12);
+}
+
+.result-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.result-title{
+    font-size:14px;
+    font-weight:900;
+}
+
+.status{
+    padding:7px 11px;
+
+    border-radius:9px;
+
+    color:#54eaff;
+
+    background:rgba(84,234,255,.07);
+
+    border:1px solid rgba(84,234,255,.13);
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.result-main{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.result-box{
+    padding:20px;
+
+    text-align:center;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.035);
+
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.result-box span{
+    display:block;
+
+    color:#6f7d98;
+
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.result-box strong{
+    display:block;
+
+    margin-top:8px;
+
+    color:white;
+
+    font-size:25px;
+    font-weight:950;
+}
+
+.result-box strong.highlight{
+    color:#54eaff;
+
+    text-shadow:0 0 20px rgba(84,234,255,.4);
+}
+
+
+/* ================= SUMMARY ================= */
+
+.input-summary{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+
+    gap:10px;
+    margin-top:15px;
+}
+
+.summary-item{
+    padding:12px;
+
+    text-align:center;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.025);
+
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.summary-item span{
+    display:block;
+
+    color:#64728c;
+
+    font-size:7px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.summary-item strong{
+    display:block;
+
+    margin-top:5px;
+
+    color:#d9e4f7;
+
+    font-size:10px;
+}
+
+
+/* ================= DASHBOARD ================= */
+
+.dashboard-btn{
+    display:block;
+
+    margin-top:20px;
+    padding:14px;
+
+    text-align:center;
+    text-decoration:none;
+
+    color:#54eaff;
+
+    border-radius:13px;
+
+    background:rgba(84,234,255,.05);
+
+    border:1px solid rgba(84,234,255,.16);
+
+    font-size:10px;
+    font-weight:900;
+}
+
+
+/* ================= INFO ================= */
+
+.info-grid{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:15px;
+    margin-top:20px;
+}
+
+.info{
+    padding:20px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.025);
+
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.info-icon{
+    font-size:25px;
+}
+
+.info h3{
+    margin-top:9px;
+    font-size:12px;
+}
+
+.info p{
+    margin-top:6px;
+
+    color:#71809c;
+
+    font-size:9px;
+    line-height:1.6;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+    padding:30px 6%;
+
+    text-align:center;
+
+    color:#687792;
+
+    font-size:9px;
+
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full-width{
+        grid-column:auto;
+    }
+
+    .location-wrapper{
+        flex-direction:column;
+    }
+
+    .location-btn{
+        height:45px;
+    }
+
+    .result-main{
+        grid-template-columns:1fr;
+    }
+
+    .input-summary{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .prediction-card{
+        padding:23px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <a href="/" class="logo">
+        Ionosphere<span>-AI</span>
+    </a>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">HOME</a>
+
+        <a href="/prediction" class="active">
+            PREDICTION
+        </a>
+
+        <a href="/dashboard">
+            DASHBOARD
+        </a>
+
+        <a href="/about">
+            ABOUT
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+
+<section class="hero">
+
+    <div class="eyebrow">
+        AI-POWERED IONOSPHERIC INTELLIGENCE
+    </div>
+
+    <h1>
+        TEC
+        <span class="gradient">
+            Prediction
+        </span>
+    </h1>
+
+    <p>
+        Enter a geographic location and observation time.
+        The machine learning model estimates Total Electron Content.
+    </p>
+
+</section>
+
+
+
+<section class="prediction-card">
+
+
+    <div class="card-title">
+        🔮 Generate TEC Prediction
+    </div>
+
+    <div class="card-subtitle">
+        Configure the observation parameters below.
+    </div>
+
+
+    <div class="data-range">
+        📡 MACHINE LEARNING TEC PREDICTION ENGINE
+    </div>
+
+
+
+    <div class="form-grid">
+
+
+        <div class="field full-width">
+
+            <label>LOCATION</label>
+
+            <div class="location-wrapper">
+
+                <input
+                    id="location"
+                    type="text"
+                    value="Mumbai, India"
+                    placeholder="Enter location name"
+                >
+
+                <button
+                    type="button"
+                    class="location-btn"
+                    onclick="getCurrentLocation()"
+                >
+                    📍 USE CURRENT LOCATION
+                </button>
+
+            </div>
+
+            <div
+                id="locationStatus"
+                class="location-status"
+            >
+                Enter coordinates manually or use current location.
+            </div>
+
+        </div>
+
+
+
+        <div class="field">
+
+            <label>LATITUDE</label>
+
+            <input
+                id="latitude"
+                type="number"
+                step="any"
+                min="-90"
+                max="90"
+                value="19.0760"
+            >
+
+        </div>
+
+
+
+        <div class="field">
+
+            <label>LONGITUDE</label>
+
+            <input
+                id="longitude"
+                type="number"
+                step="any"
+                min="-180"
+                max="180"
+                value="72.8777"
+            >
+
+        </div>
+
+
+
+        <div class="field">
+
+            <label>DATE</label>
+
+            <input
+                type="date"
+                id="date"
+                value="2020-01-01"
+            >
+
+        </div>
+
+
+
+        <div class="field">
+
+            <label>TIME</label>
+
+            <input
+                id="time"
+                type="time"
+                value="12:00"
+            >
+
+        </div>
+
+
+    </div>
+
+
+
+    <button
+        id="predictBtn"
+        class="predict-btn"
+        onclick="predictTEC()"
+    >
+        ⚡ PREDICT TEC
+    </button>
+
+
+
+    <div
+        id="loader"
+        class="loader"
+    >
+
+        <div class="spinner"></div>
+
+        ANALYZING IONOSPHERIC DATA...
+
+    </div>
+
+
+
+    <div
+        id="error"
+        class="error"
+    ></div>
+
+
+
+    <div
+        id="result"
+        class="result"
+    >
+
+
+        <div class="result-header">
+
+            <div class="result-title">
+                🤖 AI Prediction Result
+            </div>
+
+            <div
+                id="status"
+                class="status"
+            >
+                GENERATED
+            </div>
+
+        </div>
+
+
+
+        <div class="result-main">
+
+
+            <div class="result-box">
+
+                <span>
+                    PREDICTED TEC
+                </span>
+
+                <strong
+                    id="predictedTec"
+                    class="highlight"
+                >
+                    —
+                </strong>
+
+            </div>
+
+
+
+            <div class="result-box">
+
+                <span>
+                    MODEL STATUS
+                </span>
+
+                <strong
+                    id="modelStatus"
+                >
+                    READY
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="input-summary">
+
+
+            <div class="summary-item">
+
+                <span>LOCATION</span>
+
+                <strong id="resultLocation">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>LATITUDE</span>
+
+                <strong id="resultLatitude">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>LONGITUDE</span>
+
+                <strong id="resultLongitude">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>DATE</span>
+
+                <strong id="resultDate">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>TIME</span>
+
+                <strong id="resultTime">
+                    —
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <a
+            href="/dashboard"
+            class="dashboard-btn"
+        >
+            📊 OPEN FULL ANALYTICS DASHBOARD →
+        </a>
+
+
+    </div>
+
+
+</section>
+
+
+
+<section class="info-grid">
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            🌍
+        </div>
+
+        <h3>
+            Geographic Analysis
+        </h3>
+
+        <p>
+            Geographic coordinates are used
+            as prediction inputs.
+        </p>
+
+    </div>
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            🧠
+        </div>
+
+        <h3>
+            Random Forest AI
+        </h3>
+
+        <p>
+            The trained machine learning model
+            generates TEC predictions.
+        </p>
+
+    </div>
+
+
+    <div class="info">
+
+        <div class="info-icon">
+            📡
+        </div>
+
+        <h3>
+            Ionospheric Analysis
+        </h3>
+
+        <p>
+            TEC estimates help analyse
+            ionospheric conditions.
+        </p>
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<footer>
+
+    IONOSPHERE-AI
+    •
+    TEC PREDICTION ENGINE
+    •
+    MACHINE LEARNING
+
+</footer>
+
+
+
+<script>
+
+
+/* =====================================================
+   CURRENT LOCATION
+===================================================== */
+
+function getCurrentLocation(){
+
+    const locationStatus =
+        document.getElementById("locationStatus");
+
+    const latitudeInput =
+        document.getElementById("latitude");
+
+    const longitudeInput =
+        document.getElementById("longitude");
+
+    const locationInput =
+        document.getElementById("location");
+
+
+    if(!navigator.geolocation){
+
+        locationStatus.textContent =
+            "❌ Geolocation is not supported.";
+
+        locationStatus.className =
+            "location-status error";
+
+        return;
+
+    }
+
+
+    locationStatus.textContent =
+        "📍 Detecting current location...";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            latitudeInput.value =
+                position.coords.latitude.toFixed(6);
+
+            longitudeInput.value =
+                position.coords.longitude.toFixed(6);
+
+            locationInput.value =
+                "Current Location";
+
+            locationStatus.textContent =
+                "✓ Current coordinates detected.";
+
+            locationStatus.className =
+                "location-status success";
+
+        },
+
+
+        function(){
+
+            locationStatus.textContent =
+                "❌ Unable to detect location.";
+
+            locationStatus.className =
+                "location-status error";
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:10000,
+            maximumAge:0
+        }
+
+    );
+
+}
+
+
+
+/* =====================================================
+   PREDICTION
+===================================================== */
+
+async function predictTEC(){
+
+
+    const location =
+        document.getElementById("location").value.trim();
+
+    const latitude =
+        Number(
+            document.getElementById("latitude").value
+        );
+
+    const longitude =
+        Number(
+            document.getElementById("longitude").value
+        );
+
+    const date =
+        document.getElementById("date").value;
+
+    const time =
+        document.getElementById("time").value;
+
+
+    const loader =
+        document.getElementById("loader");
+
+    const button =
+        document.getElementById("predictBtn");
+
+    const errorBox =
+        document.getElementById("error");
+
+    const resultBox =
+        document.getElementById("result");
+
+
+    errorBox.style.display = "none";
+    resultBox.style.display = "none";
+
+
+    /* VALIDATION */
+
+    if(!location){
+
+        showError(
+            "Please enter a location."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !Number.isFinite(latitude) ||
+        latitude < -90 ||
+        latitude > 90
+    ){
+
+        showError(
+            "Latitude must be between -90 and 90."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !Number.isFinite(longitude) ||
+        longitude < -180 ||
+        longitude > 180
+    ){
+
+        showError(
+            "Longitude must be between -180 and 180."
+        );
+
+        return;
+
+    }
+
+
+    if(!date || !time){
+
+        showError(
+            "Please select date and time."
+        );
+
+        return;
+
+    }
+
+
+    /* LOADER */
+
+    loader.style.display = "flex";
+
+    button.disabled = true;
+
+    button.textContent =
+        "ANALYZING TEC...";
+
+
+    /* REQUEST TIMEOUT */
+
+    const controller =
+        new AbortController();
+
+
+    const timeoutId =
+        setTimeout(
+
+            () => controller.abort(),
+
+            30000
+
+        );
+
+
+    try{
+
+
+        const response =
+            await fetch(
+
+                "/api/predict",
+
+                {
+
+                    method:"POST",
+
+                    headers:{
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Accept":
+                            "application/json"
+
+                    },
+
+                    signal:
+                        controller.signal,
+
+                    body:
+                        JSON.stringify({
+
+                            location:
+                                location,
+
+                            latitude:
+                                latitude,
+
+                            longitude:
+                                longitude,
+
+                            date:
+                                date,
+
+                            time:
+                                time
+
+                        })
+
+                }
+
+            );
+
+
+        clearTimeout(timeoutId);
+
+
+        const contentType =
+            response.headers.get(
+                "content-type"
+            ) || "";
+
+
+        if(
+            !contentType.includes(
+                "application/json"
+            )
+        ){
+
+            const serverText =
+                await response.text();
+
+            console.error(
+                serverText
+            );
+
+            throw new Error(
+                "Backend did not return JSON."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Prediction response:",
+            data
+        );
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+
+                data.error ||
+                data.message ||
+                "Prediction failed."
+
+            );
+
+        }
+
+
+        const predictedTec =
+            Number(
+                data.predicted_tec
+            );
+
+
+        if(
+            !Number.isFinite(
+                predictedTec
+            )
+        ){
+
+            throw new Error(
+                "Invalid TEC prediction received."
+            );
+
+        }
+
+
+        /* DISPLAY RESULT */
+
+        document.getElementById(
+            "predictedTec"
+        ).textContent =
+            predictedTec.toFixed(2)
+            + " TECU";
+
+
+        document.getElementById(
+            "modelStatus"
+        ).textContent =
+            "READY";
+
+
+        document.getElementById(
+            "status"
+        ).textContent =
+            data.activity ||
+            data.risk ||
+            "PREDICTED";
+
+
+        document.getElementById(
+            "resultLocation"
+        ).textContent =
+            data.location ||
+            location;
+
+
+        document.getElementById(
+            "resultLatitude"
+        ).textContent =
+            Number(
+                data.latitude ??
+                latitude
+            ).toFixed(4);
+
+
+        document.getElementById(
+            "resultLongitude"
+        ).textContent =
+            Number(
+                data.longitude ??
+                longitude
+            ).toFixed(4);
+
+
+        document.getElementById(
+            "resultDate"
+        ).textContent =
+            data.date ||
+            date;
+
+
+        document.getElementById(
+            "resultTime"
+        ).textContent =
+            data.time ||
+            time;
+
+
+        /* DASHBOARD DATA */
+
+        const dashboardData = {
+
+            location:
+                data.location ||
+                location,
+
+            predicted_tec:
+                predictedTec,
+
+            latitude:
+                latitude,
+
+            longitude:
+                longitude,
+
+            date:
+                date,
+
+            time:
+                time,
+
+            activity:
+                data.activity ||
+                data.risk ||
+                "PREDICTED",
+
+            risk:
+                data.risk ||
+                data.activity ||
+                "NORMAL",
+
+            timestamp:
+                new Date().toISOString()
+
+        };
+
+
+        localStorage.setItem(
+
+            "tecPrediction",
+
+            JSON.stringify(
+                dashboardData
+            )
+
+        );
+
+
+        /* HISTORY */
+
+        let history = [];
+
+
+        try{
+
+            history =
+                JSON.parse(
+
+                    localStorage.getItem(
+                        "tecPredictionHistory"
+                    )
+
+                ) || [];
+
+        }
+        catch(error){
+
+            history = [];
+
+        }
+
+
+        history.push(
+            dashboardData
+        );
+
+
+        if(
+            history.length > 50
+        ){
+
+            history =
+                history.slice(-50);
+
+        }
+
+
+        localStorage.setItem(
+
+            "tecPredictionHistory",
+
+            JSON.stringify(
+                history
+            )
+
+        );
+
+
+        resultBox.style.display =
+            "block";
+
+
+        resultBox.scrollIntoView({
+
+            behavior:"smooth",
+
+            block:"nearest"
+
+        });
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            "Prediction error:",
+            error
+        );
+
+
+        if(
+            error.name ===
+            "AbortError"
+        ){
+
+            showError(
+                "Prediction timed out. Backend is not responding."
+            );
+
+        }
+        else{
+
+            showError(
+                error.message ||
+                "Unable to generate prediction."
+            );
+
+        }
+
+    }
+
+
+    finally{
+
+
+        clearTimeout(
+            timeoutId
+        );
+
+
+        loader.style.display =
+            "none";
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "⚡ PREDICT TEC";
+
+
+    }
+
+
+}
+
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+function showError(message){
+
+    const errorBox =
+        document.getElementById("error");
+
+    errorBox.textContent =
+        "⚠ " + message;
+
+    errorBox.style.display =
+        "block";
+
+}
+
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document.addEventListener(
+
+    "keydown",
+
+    function(event){
+
+        if(
+            event.key === "Enter" &&
+            document.activeElement.tagName === "INPUT"
+        ){
+
+            event.preventDefault();
+
+            predictTEC();
+
+        }
+
+    }
+
+);
+
+
+</script>
+
+
+</body>
+</html>

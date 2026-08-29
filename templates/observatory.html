@@ -1,0 +1,360 @@
+{% extends "base.html" %}
+
+{% block title %}Observatory | IONOSPHERE-AI{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            ◉ IONOSPHERIC OBSERVATORY
+        </div>
+
+        <h1>
+            Understand the
+            <span>Invisible Sky.</span>
+        </h1>
+
+        <p>
+            IONOSPHERE-AI monitors Total Electron Content (TEC),
+            space-weather conditions and historical ionospheric
+            behaviour to assess GPS and communication degradation risk.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="/prediction" class="btn-primary">
+                ⚡ RUN PREDICTION
+            </a>
+
+            <a href="/analytics" class="btn-secondary">
+                ◈ OPEN ANALYTICS
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section-block">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">LIVE SYSTEM</span>
+            <h2>Mission Observatory</h2>
+        </div>
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            SYSTEM ONLINE
+        </div>
+
+    </div>
+
+
+    <div class="metric-grid">
+
+        <div class="metric-card">
+
+            <div class="metric-label">
+                DATA DOMAIN
+            </div>
+
+            <div class="metric-value">
+                TEC
+            </div>
+
+            <div class="metric-description">
+                Total Electron Content
+            </div>
+
+        </div>
+
+
+        <div class="metric-card">
+
+            <div class="metric-label">
+                DATA SOURCE
+            </div>
+
+            <div class="metric-value">
+                OMNI
+            </div>
+
+            <div class="metric-description">
+                Space-weather parameters
+            </div>
+
+        </div>
+
+
+        <div class="metric-card">
+
+            <div class="metric-label">
+                AI ENGINE
+            </div>
+
+            <div class="metric-value">
+                RF
+            </div>
+
+            <div class="metric-description">
+                Random Forest predictor
+            </div>
+
+        </div>
+
+
+        <div class="metric-card">
+
+            <div class="metric-label">
+                STATUS
+            </div>
+
+            <div class="metric-value">
+                READY
+            </div>
+
+            <div class="metric-description">
+                Historical analysis available
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section-block">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">MISSION PROFILE</span>
+            <h2>What IONOSPHERE-AI Monitors</h2>
+        </div>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">◎</div>
+
+            <h3>Total Electron Content</h3>
+
+            <p>
+                TEC represents the amount of free electrons along
+                a signal path through the ionosphere. Changes in TEC
+                can affect satellite navigation and radio communication.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">✦</div>
+
+            <h3>Space Weather</h3>
+
+            <p>
+                Solar and geomagnetic conditions are incorporated
+                through OMNI measurements to provide additional
+                environmental information for prediction.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">⌁</div>
+
+            <h3>GPS Environment</h3>
+
+            <p>
+                IONOSPHERE-AI analyses ionospheric conditions that
+                may contribute to changes in satellite navigation
+                signal behaviour.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">◇</div>
+
+            <h3>AI Prediction</h3>
+
+            <p>
+                A trained Random Forest model uses historical
+                observations and engineered features to estimate
+                TEC values.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section-block mission-panel">
+
+    <div>
+
+        <span class="eyebrow">
+            DATA PIPELINE
+        </span>
+
+        <h2>
+            From Observation to Prediction
+        </h2>
+
+        <p>
+            Historical TEC observations are combined with
+            space-weather measurements, cleaned and transformed
+            into machine-learning features before entering the
+            prediction engine.
+        </p>
+
+    </div>
+
+
+    <div class="pipeline">
+
+        <div class="pipeline-step">
+            <span>01</span>
+            <strong>TEC DATA</strong>
+            <small>Historical observations</small>
+        </div>
+
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-step">
+            <span>02</span>
+            <strong>OMNI DATA</strong>
+            <small>Space-weather inputs</small>
+        </div>
+
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-step">
+            <span>03</span>
+            <strong>FEATURES</strong>
+            <small>Time & signal features</small>
+        </div>
+
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-step">
+            <span>04</span>
+            <strong>AI MODEL</strong>
+            <small>Random Forest</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="section-block">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">QUICK ACCESS</span>
+            <h2>Mission Modules</h2>
+        </div>
+
+    </div>
+
+
+    <div class="module-grid">
+
+        <a href="/prediction" class="module-card">
+
+            <span class="module-number">01</span>
+
+            <h3>Prediction</h3>
+
+            <p>
+                Enter location and time information
+                to generate a TEC prediction.
+            </p>
+
+            <span class="module-link">
+                OPEN MODULE →
+            </span>
+
+        </a>
+
+
+        <a href="/analytics" class="module-card">
+
+            <span class="module-number">02</span>
+
+            <h3>Data Telescope</h3>
+
+            <p>
+                Explore actual versus predicted TEC
+                behaviour across the dataset.
+            </p>
+
+            <span class="module-link">
+                OPEN MODULE →
+            </span>
+
+        </a>
+
+
+        <a href="/model" class="module-card">
+
+            <span class="module-number">03</span>
+
+            <h3>Model Lab</h3>
+
+            <p>
+                Inspect Random Forest performance,
+                training samples and evaluation metrics.
+            </p>
+
+            <span class="module-link">
+                OPEN MODULE →
+            </span>
+
+        </a>
+
+
+        <a href="/data" class="module-card">
+
+            <span class="module-number">04</span>
+
+            <h3>Data Core</h3>
+
+            <p>
+                Review dataset size, columns,
+                missing values and data quality.
+            </p>
+
+            <span class="module-link">
+                OPEN MODULE →
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
