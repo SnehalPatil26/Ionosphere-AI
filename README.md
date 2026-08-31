@@ -1,3 +1,8 @@
+## 👥 Project Team
+
+Name – Snehal Patil
+Partner Name – Mayuri Patil
+  
 # 🤖 IBM BOB Credits Usage in This Project
 
 ## IBM BOB Contribution
