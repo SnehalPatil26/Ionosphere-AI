@@ -1,5 +1,5 @@
 ## 👥 Project Team
-Name – Snehal Patil / Partner Name – Mayuri Patil
+Name – Snehal Patil / Partner Name – Mayuri Patil /
 Project Link -  https://ionosphere-ai-project.onrender.com/
 # 🤖 IBM BOB Credits Usage in This Project
 
